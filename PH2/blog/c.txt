@@ -1,0 +1,10 @@
+SELECT 
+	u.nickname,COUNT(f.following_user_id) as follower,u.user_id 
+FROM 
+	user as u 
+LEFT JOIN 
+	follow as f 
+ON 
+	u.user_id=f.following_user_id
+group by  nickname
+order by user_id asc;

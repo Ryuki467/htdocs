@@ -1,0 +1,257 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Youtube</title>
+<link rel="stylesheet" href="css/bootstrap.css">
+<link rel="stylesheet" href="css/bootstrap-theme.min.css">
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<script src="js/bootstrap.min.js"></script>
+<script>
+	var apiKey = 'AIzaSyAnw59OW6fa9Ka7GGG_obzWAN8pDHLleac';
+	var videoId;
+	var playlist = []; //プレイリスト 動画のIDを入れる
+	var current = 0; //現在再生中の曲のインデックス
+	var googleApiClientReady = function(){
+		init();
+	}
+	var init = function(){ //検索関連
+		$('#btn').attr('disabled',false);
+	}
+	var search = function(keyword){ 
+		gapi.client.setApiKey(apiKey);
+		gapi.client.load('youtube','v3',function(){});
+		var request = gapi.client.request({
+			'path':'/youtube/v3/search',
+			'params':{
+				'q':keyword,
+				'type':'video',
+				'part':'snippet',
+			}
+		});
+		request.execute(function(data){
+			if(!data.items)return;
+			$('#main').text('');
+			for(var i in data.items){
+				if(data.items[i].id.videoId && data.items[i].id.kind == "youtube#video"){
+					videoId = data.items[i].id.videoId;
+					//自動再生済み
+					movie = '<iframe width="560" height="315" src="https://www.youtube.com/embed/' + data.items[i].id.videoId + '?autoplay=1&mute=1" frameborder="0"><iframe>';
+					$('#main').append('<div id="movie_title"><a href="https://www.youtube.com/watch?v=' + data.items[i].id.videoId + 'target="_black">' + data.items[i].snippet.title 
+					+ '</a></div>' 
+					+ '<div id="movie_description">' + data.items[i].snippet.description + '</div>').children('#movie_title').after(movie);
+				}
+				break;
+			}
+			search_related(keyword,videoId);
+		});
+	}
+	var search_related = function(keyword,videoId){
+		gapi.client.setApiKey(apiKey);
+		gapi.client.load('youtube','v3',function(){});
+		var request = gapi.client.request({
+			'path':'/youtube/v3/search',
+			'params':{
+				'q':keyword,
+				'type':'video',
+				'rekatedToVideoId':videoId,
+				'maxResults': 5,
+				'part':'snippet',
+			}
+		});
+		request.execute(function(data){
+			if(!data.items)return;
+			$('#related').text('');
+			$('#related').append('<table>');
+			for(var i in data.items){
+				playlist.push(data.items[i].id.videoId); //youtubeのIDを追加
+				if(data.items[i].id.videoId && data.items[i].id.kind == "youtube#video"){
+					$('#related table').append('<tr class="movie_box"><td class="thum"><a href="https://www.youtube.com/watch?v=' + data.items[i].id.videoId 
+					+ 'target="_black"><img src=' + data.items[i].snippet.thumbnails.default.url + '></a></td>'
+					+ '<td class="details">' + data.items[i].snippet.title 
+					+ '<span class="description"></span></td></tr>');
+				}
+				console.log(i);
+			}
+			$('#loading').fadeOut();
+			$('#main_box').show();
+		});
+	}
+	
+	//次を再生
+	function playNext(){
+		//プレイリストの次を再生。最後まで到達したら先頭のビデオを再生
+		current++;
+		if(current >= playlist.length){
+			current = 0;
+		}
+		player.loadVideoById(playlist[current]);
+	}
+	//戻る
+	function playPrev(){
+		current--;
+		if(current<0){
+			current = playlist.length-1;
+		}
+		player.loadVideoById(playlist[current]);
+	}
+	//再生と停止
+	function exe(){
+		if(player.getPlayerState() == YT.PlayerState.PLAYING){
+			player.pauseVideo();
+		}else{
+			player.playVideo();
+		}
+	}
+	//IFrame Player APIを非同期にロード
+	var tag = document.createElement('script');
+	tag.src = 'http://www.youtube.com/player_api';
+	var firstScriptTag = document.getElementsByTagName('script')[0];
+	firstScriptTag.parentNode.insertBefore(tag,firstScriptTag);
+	
+	//APIをダウンロードしたら<iframe>とYoutubeプレイヤーを生成
+	var player;
+	function onYouTubePlayerAPIReady(){
+		player = new YT.Player('player',{
+			height:'390',
+			width:'640',
+			videoId:playlist[current],
+			events:{
+				'onReady':onPlayerReady,
+				'onStateChange':onPlayerStateChange,
+				'onError':onPlayerError
+			}
+		});
+	}
+	//プレイヤーが準備できたら呼び出される
+	function onPlayerReady(event){
+		event.target.playVideo();
+	}
+	//ステータスが変更されたら呼び出される
+	//ビデオが終わったら次を再生
+	function onPlayerStateChange(event){
+		if(event.data == YT.PlayerState.ENDED){
+			playNext();
+		}else if(event.data == YT.PlayerState.PLAYING){
+			$('#exe').val("停止");
+		}else if(event.data == YT.PlayerState.PAUSED){
+			$('#exe').val("再生");
+		}
+	}
+	//エラーが起きたら次を再生
+	function onPlayerError(event){
+		playNext();
+	}
+	$(window).on("load",function(){
+		$('#prev').on('click',function(){
+			playPrev();
+		});
+		$('#next').on('click',function(){
+			playNext();
+		});
+		$('#exe').on('click',function(){
+			exe();
+		});
+	});
+	
+	$(function(){
+		$('#main_box').hide();
+		$("form").submit(function(){
+			var keyword = $('#keyword').val();
+			$('#loading').fadeIn();
+			search(keyword);
+			return false;
+		});
+	});
+</script>
+<style>
+html, body{
+	height:100%;
+	margin:0;
+	padding:0;
+}
+#container{
+	background-color:#f1f1f1;
+}
+#header{
+	padding:20px;
+	background-color:#fff;
+}
+#header form{
+	width:1200px;
+	margin:0 auto;
+}
+#loader{
+	display:none;
+	position:fixed;
+	top:0;
+	left:0;
+	width:100%;
+	height:100%;
+	background:url(http://no1s.biz/kenshu/image/loader.gif) no-repeat center center #ccc;
+	opacity:0.5;
+	z-index:9999;
+}
+#main_box{
+	margin:0 auto;
+	width: 1200px;
+}
+#main{
+	width:600px;
+	background-color:#fff;
+	margin-top:20px;
+	
+}
+#movie_title{
+	font-size:1.2em;
+	margin-bottom:20px;
+}
+#movie_description{
+	font-size:1em;
+	margin:20px 0;
+}
+#related{
+	background-color:#f1f1f1;
+	margin-top:20px;
+	padding-left:50px;
+	width:500px;
+}
+#related table{
+	background-color:#fff;
+}
+#related table tr{
+	border-bottom:3px solid #f1f1f1;
+}
+#related td.thum{
+	padding:10px 10px 20px 10px;
+}
+#related td.details{
+	padding:10px 10px 20px 0;
+	vertical-align:top;
+}
+#choose{
+	background-color: orangered;
+    color: white;
+}
+</style>
+</head>
+<body>
+<div id="container">
+	<div id="loading"></div>
+	<div id="header">
+		<form>
+			<input type="text" id="keyword" value="ジョジョの奇妙な冒険">
+			<input type="submit" id="btn" value="検索" disabled="disabled">
+			<input type="button" value=" < < " id="prev">
+			<input type="button" value=" 再生 " id="exe">
+			<input type="button" value=" > > " id="next">
+		</form>
+	</div>
+	<div id="main_box" class="clearfix">
+		<div id="main" class="pull-left"></div>
+		<div id="related" class="pull-left"></div>
+	</div>
+</div>
+<script src="https://apis.google.com/js/client.js?onload=googleApiClientReady"></script>
+</body>
+</html>

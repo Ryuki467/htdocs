@@ -1,0 +1,47 @@
+SELECT 
+	u.user_id,u.nickname,COUNT(f.user_id) as follow,COUNT(fo.following_user_id) as follower
+FROM 
+		user as u 
+	LEFT JOIN 
+		follow as f 
+	ON 
+		u.user_id=f.user_id
+LEFT JOIN
+	follow as fo
+ON
+	u.user_id=fo.following_user_id
+group by nickname 
+order by u.user_id asc;
+
+
+SELECT 
+	u.user_id,u.nickname,f.user_id as follow,fo.following_user_id as follower
+FROM 
+		user as u 
+	LEFT JOIN 
+		follow as f 
+	ON 
+		u.user_id=f.user_id
+LEFT JOIN
+	follow as fo
+ON
+	u.user_id=fo.following_user_id
+
+order by u.user_id asc;
+
+
+select u.user_id, nickname, f.follow_id
+from
+user u
+left join
+follow f
+on u.user_id = f.user_id
+order by u.user_id;
+
+select u.user_id, nickname, f.follow_id
+from
+user u
+left join
+follow f
+on u.user_id = f.following_user_id
+order by u.user_id;

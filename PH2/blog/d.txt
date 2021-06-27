@@ -1,0 +1,13 @@
+SELECT 
+	u.nickname,f.user_id,fo.following_user_id
+FROM 
+		user as u 
+	LEFT JOIN 
+		follow as f 
+	ON 
+		u.user_id=f.user_id
+LEFT JOIN
+	follow as fo
+ON
+	u.user_id=fo.following_user_id
+order by user_id asc;
