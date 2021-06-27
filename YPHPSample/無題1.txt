@@ -1,0 +1,16 @@
+<?php
+$dislike = 4;
+$rooms = [101,204,301,401,501,604];
+$room2 = [];
+
+foreach($rooms as $room){
+	$result = explode("$dislike", $room);
+	if(strlen($result) == 3){
+		$room2 = $result;
+	}
+}
+if(isset($room2)){
+	echo"希望する病室は" . $room2 . "です";
+}else{
+	echo"希望する病室はありません";
+}

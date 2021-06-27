@@ -1,0 +1,369 @@
+
+no1s@DESKTOP-UVBQMTE MINGW64 ~
+$ cd /c/'Program Files'/Git/etc/ssh
+
+no1s@DESKTOP-UVBQMTE MINGW64 /c/Program Files/Git/etc/ssh
+$ ssh-keygen -t rsa -f ssh_host_rsa_key
+Generating public/private rsa key pair.
+Enter passphrase (empty for no passphrase):
+Enter same passphrase again:
+Your identification has been saved in ssh_host_rsa_key
+Your public key has been saved in ssh_host_rsa_key.pub
+The key fingerprint is:
+SHA256:a0+WnPsNJ894COu2IQ+cMwGiYhfnHi3mbm5L1TPPfqE no1s@DESKTOP-UVBQMTE
+The key's randomart image is:
++---[RSA 3072]----+
+|                 |
+|                 |
+|   ....          |
+|   .+....        |
+|.... = oS+       |
+|... + +. =*o .   |
+|     +  X B=+.o  |
+|    oo . X+E.X.  |
+|    ++.  o*++.+  |
++----[SHA256]-----+
+
+no1s@DESKTOP-UVBQMTE MINGW64 /c/Program Files/Git/etc/ssh
+$ ssh-keygen -t ecdsa -f ssh_host_ecdsa_key
+Generating public/private ecdsa key pair.
+Enter passphrase (empty for no passphrase):
+Enter same passphrase again:
+Your identification has been saved in ssh_host_ecdsa_key
+Your public key has been saved in ssh_host_ecdsa_key.pub
+The key fingerprint is:
+SHA256:BkcMd2GyDHr18+tGy8X3tK2dM54OPy7a7J+esXI5Qe4 no1s@DESKTOP-UVBQMTE
+The key's randomart image is:
++---[ECDSA 256]---+
+|      oo= +.     |
+|     . .       |
+|    . o + o      |
+|     . o   o   . |
+|        S   ..o  |
+|       .    ..ooo|
+|           o.+.+*|
+|           .*ooEX|
+|           o++@#*|
++----[SHA256]-----+
+
+no1s@DESKTOP-UVBQMTE MINGW64 /c/Program Files/Git/etc/ssh
+$ ssh-keygen -t ed25519 -f ssh_host_ed25519_key
+Generating public/private ed25519 key pair.
+Enter passphrase (empty for no passphrase):
+Enter same passphrase again:
+Your identification has been saved in ssh_host_ed25519_key
+Your public key has been saved in ssh_host_ed25519_key.pub
+The key fingerprint is:
+SHA256:kdR07G3maVybNZwfuXxPXm84RIuovwO2CHwPCCX6n7M no1s@DESKTOP-UVBQMTE
+The key's randomart image is:
++--[ED25519 256]--+
+|        .o...    |
+|  . .  . ....    |
+| . o    o  . .. o|
+|. .      .  . =*o|
+| . o .  S  . B.+O|
+|  . + o o . . B==|
+|   . + = +   o +=|
+|    + . + .   o =|
+|    Eo   .oo   o |
++----[SHA256]-----+
+
+no1s@DESKTOP-UVBQMTE MINGW64 /c/Program Files/Git/etc/ssh
+$ /usr/bin/sshd.exe
+
+no1s@DESKTOP-UVBQMTE MINGW64 /c/Program Files/Git/etc/ssh
+$ cd /c/xampp/htdocs/PH2/plan
+
+no1s@DESKTOP-UVBQMTE MINGW64 /c/xampp/htdocs/PH2/plan
+$ git init
+Initialized empty Git repository in C:/xampp/htdocs/PH2/plan/.git/
+
+no1s@DESKTOP-UVBQMTE MINGW64 /c/xampp/htdocs/PH2/plan (master)
+$ ipconfig
+
+Windows IP Configuration
+
+
+Ethernet adapter ▒C▒[▒T▒l▒b▒g:
+
+   Media State . . . . . . . . . . . : Media disconnected
+   Connection-specific DNS Suffix  . :
+
+Wireless LAN adapter ▒▒▒[▒J▒▒ ▒G▒▒▒A▒ڑ▒* 1:
+
+   Media State . . . . . . . . . . . : Media disconnected
+   Connection-specific DNS Suffix  . :
+
+Wireless LAN adapter ▒▒▒[▒J▒▒ ▒G▒▒▒A▒ڑ▒* 2:
+
+   Media State . . . . . . . . . . . : Media disconnected
+   Connection-specific DNS Suffix  . :
+
+Wireless LAN adapter Wi-Fi:
+
+   Connection-specific DNS Suffix  . : flets-east.jp
+   IPv6 Address. . . . . . . . . . . : 2404:7a80:27c1:1a00:ec78:154:1cad:eef
+   Temporary IPv6 Address. . . . . . : 2404:7a80:27c1:1a00:f5e8:26f7:cd49:fc6c
+   Link-local IPv6 Address . . . . . : fe80::ec78:154:1cad:eef%15
+   IPv4 Address. . . . . . . . . . . : 192.168.10.110
+   Subnet Mask . . . . . . . . . . . : 255.255.255.0
+   Default Gateway . . . . . . . . . : fe80::225:36ff:fe97:4f13%15
+                                       192.168.10.1
+
+Ethernet adapter Bluetooth ▒l▒b▒g▒▒▒[▒N▒ڑ▒:
+
+   Media State . . . . . . . . . . . : Media disconnected
+   Connection-specific DNS Suffix  . :
+
+no1s@DESKTOP-UVBQMTE MINGW64 /c/xampp/htdocs/PH2/plan (master)
+$ ^C
+
+no1s@DESKTOP-UVBQMTE MINGW64 /c/xampp/htdocs/PH2/plan (master)
+$ git remote add origin ssh://192.168.10.110/c/xampp/htdocs/PH2/plan
+
+no1s@DESKTOP-UVBQMTE MINGW64 /c/xampp/htdocs/PH2/plan (master)
+$ git add .
+warning: LF will be replaced by CRLF in PlanApplication.php.
+The file will have its original line endings in your working directory
+warning: LF will be replaced by CRLF in bootstrap.php.
+The file will have its original line endings in your working directory
+warning: LF will be replaced by CRLF in controllers/EventController.php.
+The file will have its original line endings in your working directory
+warning: LF will be replaced by CRLF in controllers/UserController.php.
+The file will have its original line endings in your working directory
+warning: LF will be replaced by CRLF in core/Application.php.
+The file will have its original line endings in your working directory
+warning: LF will be replaced by CRLF in core/ClassLoader.php.
+The file will have its original line endings in your working directory
+warning: LF will be replaced by CRLF in core/Controller.php.
+The file will have its original line endings in your working directory
+warning: LF will be replaced by CRLF in core/DbManager.php.
+The file will have its original line endings in your working directory
+warning: LF will be replaced by CRLF in core/DbRepository.php.
+The file will have its original line endings in your working directory
+warning: LF will be replaced by CRLF in core/HttpNotFoundException.php.
+The file will have its original line endings in your working directory
+warning: LF will be replaced by CRLF in core/Request.php.
+The file will have its original line endings in your working directory
+warning: LF will be replaced by CRLF in core/Response.php.
+The file will have its original line endings in your working directory
+warning: LF will be replaced by CRLF in core/Router.php.
+The file will have its original line endings in your working directory
+warning: LF will be replaced by CRLF in core/Session.php.
+The file will have its original line endings in your working directory
+warning: LF will be replaced by CRLF in core/UnauthorizedActionException.php.
+The file will have its original line endings in your working directory
+warning: LF will be replaced by CRLF in core/View.php.
+The file will have its original line endings in your working directory
+warning: LF will be replaced by CRLF in models/DepartmentRepository.php.
+The file will have its original line endings in your working directory
+warning: LF will be replaced by CRLF in models/EventRepository.php.
+The file will have its original line endings in your working directory
+warning: LF will be replaced by CRLF in models/UserRepository.php.
+The file will have its original line endings in your working directory
+warning: LF will be replaced by CRLF in views/errors.php.
+The file will have its original line endings in your working directory
+warning: LF will be replaced by CRLF in views/event/index.php.
+The file will have its original line endings in your working directory
+warning: LF will be replaced by CRLF in views/event/new.php.
+The file will have its original line endings in your working directory
+warning: LF will be replaced by CRLF in views/event/plan.php.
+The file will have its original line endings in your working directory
+warning: LF will be replaced by CRLF in views/event/plan_index.php.
+The file will have its original line endings in your working directory
+warning: LF will be replaced by CRLF in views/layout.php.
+The file will have its original line endings in your working directory
+warning: LF will be replaced by CRLF in views/user/index.php.
+The file will have its original line endings in your working directory
+warning: LF will be replaced by CRLF in views/user/inputs.php.
+The file will have its original line endings in your working directory
+warning: LF will be replaced by CRLF in views/user/login.php.
+The file will have its original line endings in your working directory
+warning: LF will be replaced by CRLF in views/user/register.php.
+The file will have its original line endings in your working directory
+warning: LF will be replaced by CRLF in web/.htaccess.
+The file will have its original line endings in your working directory
+warning: LF will be replaced by CRLF in web/css/style.css.
+The file will have its original line endings in your working directory
+warning: LF will be replaced by CRLF in web/index.php.
+The file will have its original line endings in your working directory
+
+no1s@DESKTOP-UVBQMTE MINGW64 /c/xampp/htdocs/PH2/plan (master)
+$ git commit -m 'first commit'
+[master (root-commit) 4c28e72] first commit
+ 33 files changed, 2063 insertions(+)
+ create mode 100644 PlanApplication.php
+ create mode 100644 bootstrap.php
+ create mode 100644 controllers/EventController.php
+ create mode 100644 controllers/UserController.php
+ create mode 100644 core/Application.php
+ create mode 100644 core/ClassLoader.php
+ create mode 100644 core/Controller.php
+ create mode 100644 core/DbManager.php
+ create mode 100644 core/DbRepository.php
+ create mode 100644 core/HttpNotFoundException.php
+ create mode 100644 core/Request.php
+ create mode 100644 core/Response.php
+ create mode 100644 core/Router.php
+ create mode 100644 core/Session.php
+ create mode 100644 core/UnauthorizedActionException.php
+ create mode 100644 core/View.php
+ create mode 100644 create.sql
+ create mode 100644 models/DepartmentRepository.php
+ create mode 100644 models/EventRepository.php
+ create mode 100644 models/UserRepository.php
+ create mode 100644 views/errors.php
+ create mode 100644 views/event/index.php
+ create mode 100644 views/event/new.php
+ create mode 100644 views/event/plan.php
+ create mode 100644 views/event/plan_index.php
+ create mode 100644 views/layout.php
+ create mode 100644 views/user/index.php
+ create mode 100644 views/user/inputs.php
+ create mode 100644 views/user/login.php
+ create mode 100644 views/user/register.php
+ create mode 100644 web/.htaccess
+ create mode 100644 web/css/style.css
+ create mode 100644 web/index.php
+
+no1s@DESKTOP-UVBQMTE MINGW64 /c/xampp/htdocs/PH2/plan (master)
+$ git push origin master
+The authenticity of host '192.168.10.110 (192.168.10.110)' can't be established.
+ED25519 key fingerprint is SHA256:kdR07G3maVybNZwfuXxPXm84RIuovwO2CHwPCCX6n7M.
+This key is not known by any other names
+Are you sure you want to continue connecting (yes/no/[fingerprint])? yes
+Warning: Permanently added '192.168.10.110' (ED25519) to the list of known hosts.
+Everything up-to-date
+
+no1s@DESKTOP-UVBQMTE MINGW64 /c/xampp/htdocs/PH2/plan (master)
+$ cd ~/Desktop
+
+no1s@DESKTOP-UVBQMTE MINGW64 ~/Desktop
+$ git clone ssh://192.168.10.51/c/repos/sample.git
+Cloning into 'sample'...
+The authenticity of host '192.168.10.51 (192.168.10.51)' can't be established.
+ED25519 key fingerprint is SHA256:/scvlboLdL3lOLgL6NDX1tbykT1b17MZx2nf3xpBAnM.
+This key is not known by any other names
+Are you sure you want to continue connecting (yes/no/[fingerprint])? yse
+Please type 'yes', 'no' or the fingerprint:
+Host key verification failed.
+fatal: Could not read from remote repository.
+
+Please make sure you have the correct access rights
+and the repository exists.
+
+no1s@DESKTOP-UVBQMTE MINGW64 ~/Desktop
+$ cd /c/xampp/htdocs/PH2/plan
+
+no1s@DESKTOP-UVBQMTE MINGW64 /c/xampp/htdocs/PH2/plan (master)
+$ git log --graph
+* commit 4c28e72dea3cb704a58d39cd407418ef42640162 (HEAD -> master, origin/master)
+  Author: サイトウ <saito.ryuki@no1s.biz>
+  Date:   Mon May 31 11:33:35 2021 +0900
+
+      first commit
+
+no1s@DESKTOP-UVBQMTE MINGW64 /c/xampp/htdocs/PH2/plan (master)
+$ git push origin master
+Everything up-to-date
+
+no1s@DESKTOP-UVBQMTE MINGW64 /c/xampp/htdocs/PH2/plan (master)
+$ cd ~/Desktop
+
+no1s@DESKTOP-UVBQMTE MINGW64 ~/Desktop
+$ git clone ssh://192.168.10.110/c/repos/sample.git
+Cloning into 'sample'...
+warning: You appear to have cloned an empty repository.
+
+no1s@DESKTOP-UVBQMTE MINGW64 ~/Desktop
+$ cd ~/Desktop
+
+no1s@DESKTOP-UVBQMTE MINGW64 ~/Desktop
+$ git clone ssh://192.168.10.110/c/repos/sample.git
+Cloning into 'sample'...
+warning: You appear to have cloned an empty repository.
+
+no1s@DESKTOP-UVBQMTE MINGW64 ~/Desktop
+$ cd /c/xampp/htdocs/PH2/plan
+
+no1s@DESKTOP-UVBQMTE MINGW64 /c/xampp/htdocs/PH2/plan (master)
+$ ll
+total 21
+-rw-r--r-- 1 no1s 197121  908 May 28 15:16 PlanApplication.php
+-rw-r--r-- 1 no1s 197121  237 May 10 17:32 bootstrap.php
+drwxr-xr-x 1 no1s 197121    0 May 28 10:56 controllers/
+drwxr-xr-x 1 no1s 197121    0 May 28 10:40 core/
+-rw-r--r-- 1 no1s 197121 1065 May 28 10:55 create.sql
+drwxr-xr-x 1 no1s 197121    0 May 28 11:39 models/
+drwxr-xr-x 1 no1s 197121    0 May 28 10:57 views/
+drwxr-xr-x 1 no1s 197121    0 May 28 10:40 web/
+
+no1s@DESKTOP-UVBQMTE MINGW64 /c/xampp/htdocs/PH2/plan (master)
+$ ls -la
+total 33
+drwxr-xr-x 1 no1s 197121    0 May 31 11:27 ./
+drwxr-xr-x 1 no1s 197121    0 May 28 10:38 ../
+drwxr-xr-x 1 no1s 197121    0 May 31 11:33 .git/
+-rw-r--r-- 1 no1s 197121  908 May 28 15:16 PlanApplication.php
+-rw-r--r-- 1 no1s 197121  237 May 10 17:32 bootstrap.php
+drwxr-xr-x 1 no1s 197121    0 May 28 10:56 controllers/
+drwxr-xr-x 1 no1s 197121    0 May 28 10:40 core/
+-rw-r--r-- 1 no1s 197121 1065 May 28 10:55 create.sql
+drwxr-xr-x 1 no1s 197121    0 May 28 11:39 models/
+drwxr-xr-x 1 no1s 197121    0 May 28 10:57 views/
+drwxr-xr-x 1 no1s 197121    0 May 28 10:40 web/
+
+no1s@DESKTOP-UVBQMTE MINGW64 /c/xampp/htdocs/PH2/plan (master)
+$ git status
+On branch master
+nothing to commit, working tree clean
+
+no1s@DESKTOP-UVBQMTE MINGW64 /c/xampp/htdocs/PH2/plan (master)
+$ tig
+
+no1s@DESKTOP-UVBQMTE MINGW64 /c/xampp/htdocs/PH2/plan (master)
+$ cd .git
+
+no1s@DESKTOP-UVBQMTE MINGW64 /c/xampp/htdocs/PH2/plan/.git (GIT_DIR!)
+$ ll
+total 16
+-rw-r--r-- 1 no1s 197121   13 May 31 11:33 COMMIT_EDITMSG
+-rw-r--r-- 1 no1s 197121   23 May 31 11:27 HEAD
+-rw-r--r-- 1 no1s 197121  245 May 31 11:31 config
+-rw-r--r-- 1 no1s 197121   73 May 31 11:27 description
+drwxr-xr-x 1 no1s 197121    0 May 31 11:27 hooks/
+-rw-r--r-- 1 no1s 197121 3181 May 31 11:33 index
+drwxr-xr-x 1 no1s 197121    0 May 31 11:27 info/
+drwxr-xr-x 1 no1s 197121    0 May 31 11:33 logs/
+drwxr-xr-x 1 no1s 197121    0 May 31 11:33 objects/
+drwxr-xr-x 1 no1s 197121    0 May 31 11:35 refs/
+
+no1s@DESKTOP-UVBQMTE MINGW64 /c/xampp/htdocs/PH2/plan/.git (GIT_DIR!)
+$ vim config
+
+no1s@DESKTOP-UVBQMTE MINGW64 /c/xampp/htdocs/PH2/plan/.git (GIT_DIR!)
+$ cd ..
+
+no1s@DESKTOP-UVBQMTE MINGW64 /c/xampp/htdocs/PH2/plan (master)
+$ git pull origin master
+From ssh://192.168.10.110/c/xampp/htdocs/PH2/plan
+ * branch            master     -> FETCH_HEAD
+Already up to date.
+
+no1s@DESKTOP-UVBQMTE MINGW64 /c/xampp/htdocs/PH2/plan (master)
+$ cd ~/Desktop/
+
+no1s@DESKTOP-UVBQMTE MINGW64 ~/Desktop
+$ git clone ssh://192.168.10.110/c/repos/sample.git
+fatal: destination path 'sample' already exists and is not an empty directory.
+
+no1s@DESKTOP-UVBQMTE MINGW64 ~/Desktop
+$ git clone ssh://192.168.10.110/c/repos/sample.git sample2
+Cloning into 'sample2'...
+warning: You appear to have cloned an empty repository.
+
+no1s@DESKTOP-UVBQMTE MINGW64 ~/Desktop
+$ ^C
+
+no1s@DESKTOP-UVBQMTE MINGW64 ~/Desktop
+$
