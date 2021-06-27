@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="UTF-8">
+	<title>jQuery</title>
+	<meta http-equiv="Content-Script-Type" content="text/javascript">
+	<script src="//code.jquery.com/jquery-2.2.4.js"></script>
+	<script type="text/javascript">
+		$(function(){
+			$("#btn").on("click",function(){
+				$("#q01").html("ポニーテールとシュシュ");
+			});
+		});
+	</script>
+</head>
+<body>
+<button id="btn">クリック</button>
+<p id="q01"></p>
+</body>
+</html>

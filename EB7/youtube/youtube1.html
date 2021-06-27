@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Youtube</title>
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<script>
+	var apiKey = 'AIzaSyCqn6pnlUNoHZ2UpiFcsmcBB5gYNVq1WTU';
+	var googleApiClientReady = function(){
+		init();
+	};
+	var init = function(){
+		$('#btn').attr('disabled',false);
+	};
+	var search = function(keyword){
+		gapi.client.setApiKey(apiKey);
+		gapi.client.load('youtube','v3',function(){});
+		var request = gapi.client.request({
+			'path':'/youtube/v3/search',
+			'params':{
+				'q':keyword,
+				'type':'video',
+				'part':'snippet',
+			}
+		});
+		request.execute(function(data){
+			console.log(data);
+			if(!data.items)return;
+			$('#main').text('');
+			$('#main').append('<table>');
+			for(var i in data.items){
+				if(data.items[i].id.videoId && data.items[i].id.kind == "youtube#video"){
+					console.log(data.items[i].id.videoId);
+					$('#main table').append('<tr class="movie_box"><td class="thum"><img src=' + data.items[i].snippet.thumbnails.medium.url + '></td>' 
+					+ '<td class="details"><a href="https://www.youtube.com/watch?v=' + data.items[i].id.videoId + 'target="_black">' + data.items[i].snippet.title 
+					+ '</a><span class="description">' + data.items[i].snippet.description + '</span></td></tr>');
+				}
+			}
+		});
+		$('#loading').fadeOut();
+	}
+	$(function(){
+		$("form").submit(function(){
+			var keyword = $('#keyword').val();
+			$('#loading').fadeIn();
+			search(keyword);
+			return false;
+		});
+	});
+</script>
+<style>
+html, body{
+	height:100%;
+	margin:0;
+	padding:0;
+}
+#container{
+	padding:20px;
+}
+#loader{
+	display:none;
+	position:fixed;
+	top:0;
+	left:0;
+	width:100%;
+	height:100%;
+	background:url(http://no1s.biz/kenshu/image/loader.gif) no-repeat center center #ccc;
+	opacity:0.5;
+	z-index:9999;
+}
+table,tr,td{
+	border-collapse:collapse;
+	border:1px solid #ffccde;
+	padding:10px;
+	margin:10px 0;
+}
+.movie_box{
+	
+}
+.thum{
+	width:350px;
+	background-color:#ffe0f2;
+}
+.details{
+	vertical-align:top;
+	font-size:1.5em;
+}
+.description{
+	font-size:0.5em;
+}
+</style>
+</head>
+<body>
+<div id="container">
+	<div id="loading"></div>
+	<div id="header">
+		<form>
+			<input type="text" id="keyword" value="AKB48">
+			<input type="submit" id="btn" value="検索" disabled="disabled">
+		</form>
+	</div>
+	<div id="main"></div>
+</div>
+<script src="https://apis.google.com/js/client.js?onload=googleApiClientReady"></script>
+</body>
+</html>

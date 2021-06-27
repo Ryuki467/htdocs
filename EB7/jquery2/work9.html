@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="UTF-8">
+	<title>jQuery</title>
+	
+	<style>
+		.akb{
+			color:#F00;
+		}
+	</style>
+	
+	<meta http-equiv="Content-Script-Type" content="text/javascript">
+	<script src="//code.jquery.com/jquery-2.2.4.js"></script>
+	<script type="text/javascript">
+		$(function(){
+			$("#q39").on("click",function(){
+				var radio = $('input:radio[name="fruits"]:checked').val();
+				if(radio == undefined){
+					radio = "";
+				}
+				vegetables = [];
+				$('input:checkbox[name="vegetables"]:checked').each(function() {
+					vegetables.push($(this).val());
+				});
+				var vegetable = vegetables.join();
+				var text = "フルーツ:" + radio + "<br>野菜:" + vegetable;
+				$("#q39_answer").html(text);
+			});
+		});
+	</script>
+</head>
+<body>
+	<div>
+		<form>
+			<div>フルーツ
+				<label><input type="radio" name="fruits" value="orange">オレンジ</label>
+				<label><input type="radio" name="fruits" value="apple">りんご</label>
+				<label><input type="radio" name="fruits" value="banana">バナナ</label>
+			</div>
+			<div>野菜
+				<label><input type="checkbox" name="vegetables" value="carrot">人参</label>
+				<label><input type="checkbox" name="vegetables" value="onion">玉ねぎ</label>
+				<label><input type="checkbox" name="vegetables" value="potato">いも</label>
+			</div>
+			<div><input type="button" id="q39" value="クリック"></div>
+		</form>
+	</div>
+	<div id="q39_answer"></div>
+</body>
+</html>

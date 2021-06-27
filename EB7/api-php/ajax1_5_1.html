@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="UTF-8">
+	<title>ajax練習</title>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
+<script>
+//jQuery1.5で導入された記載方法
+//初期設定
+$(function(){
+	$('#btn').on("click",function(){
+		//ajax実行処理
+		$.ajax({
+			url:"content1.html",
+			dataType:'html',
+			type:'POST',
+		}).success(function(data){
+			//AJAX処理が成功した時のコールバック関数
+			$('#result').text("");
+			$('#result').html(data);
+		}).error(function(data){
+			//AJAX処理が失敗した時のコールバック関数
+			$('#result').text("");
+			$('#result').html("エラーが発生しました");
+		});
+	});
+});
+</script>
+<style>
+#btn{
+	padding:10px 15px;
+	border:1px solid #ccc;
+	width:200px;
+	text-align:center;
+	background-color:#FF99FF;
+	cursor:pointer;
+}
+</style>
+</head>
+<body>
+<div id="container">
+	<div id="btn">総選挙の結果は？</div>
+	<div id="result"></div>
+</div>
+</body>
+</html>

@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="UTF-8">
+	<title>jQuery</title>
+	
+	<style>
+		.akb{
+			color:#F00;
+		}
+	</style>
+	
+	<meta http-equiv="Content-Script-Type" content="text/javascript">
+	<script src="//code.jquery.com/jquery-2.2.4.js"></script>
+	<script type="text/javascript">
+		$(function(){
+			$("#q38").on("change",function(){
+				var id = $('#q38 option:selected').attr("id");
+				if(id != ""){
+					$("#q38_answer").html($("#"+id+"").val() + ":" + $("#"+id+"").html());
+				}else{
+					$("#q38_answer").html("");
+				}
+			});
+		});
+	</script>
+</head>
+<body>
+	<div>
+		<select id="q38">
+			<option id="" value="" selected>--選択してください--</option>
+			<option id="maeda" value="maeda">前田敦子</option>
+			<option id="oshima" value="oshima">大島優子</option>
+			<option id="watanae" value="watanae">渡辺麻友</option>
+		</select>
+	</div>
+	<div id="q38_answer"></div>
+</body>
+</html>

@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="UTF-8">
+	<title>jQuery</title>
+	
+	<style>
+		.akb{
+			color:#F00;
+		}
+	</style>
+	
+	<meta http-equiv="Content-Script-Type" content="text/javascript">
+	<script src="//code.jquery.com/jquery-2.2.4.js"></script>
+	<script type="text/javascript">
+		$(function(){
+			$("ul > li").on("click",function(event){
+				event.preventDefault();
+			});
+			$("ul a").hover(
+				function(){
+					id = $(this).attr("id");
+					url = $("#" + id + "").attr("href");
+					$("#" + id + "").attr('href','');
+				},
+				function(){
+					$("#" + id + "").attr('href',url);
+				}
+			);
+		});
+	</script>
+</head>
+<body>
+	<ul>
+		<li><a id="q37" href="http://www.yahoo.co.jp">Yahoo</a></li>
+		<li><a id="q38" href="http://www.rakuten.co.jp">Rakuten</a></li>
+		<li><a id="q39" href="http://www.amazon.co.jp">amazon</a></li>
+		<li><a id="q40" href="http://www.google.co.jp">Google</a></li>
+	</ul>
+</body>
+</html>

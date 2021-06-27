@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="UTF-8">
+	<title>jQuery</title>
+
+	<meta http-equiv="Content-Script-Type" content="text/javascript">
+	<script src="//code.jquery.com/jquery-2.2.4.js"></script>
+	<script type="text/javascript">
+		$(function(){
+			$("#btn").on("click",function(){
+				$("input").val("大島優子");
+			});
+		});
+	</script>
+</head>
+<body>
+	<button id="btn">クリック</button>
+	<form>
+		<input type="text" value="前田敦子">
+	</form>
+</body>
+</html>

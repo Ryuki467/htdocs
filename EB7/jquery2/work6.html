@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="UTF-8">
+	<title>jQuery</title>
+	
+	<style>
+		.akb{
+			color:#F00;
+		}
+	</style>
+	
+	<meta http-equiv="Content-Script-Type" content="text/javascript">
+	<script src="//code.jquery.com/jquery-2.2.4.js"></script>
+	<script type="text/javascript">
+		$(function(){
+			$("#btn").on("click",function(){
+				var value = $("#q36").val();
+				if(value >= 70){
+					$("#q36_answer").html("合格!").css("color","blue");
+				}else{
+					$("#q36_answer").html("不合格");
+				}
+			});
+		});
+	</script>
+</head>
+<body>
+	点数：<input type="text" id="q36" value="55">
+	<input type="button" id="btn" value="計算">
+	<div id="q36_answer"></div>
+</body>
+</html>

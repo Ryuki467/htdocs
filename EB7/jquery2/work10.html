@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="UTF-8">
+	<title>jQuery</title>
+	
+	<style>
+		ul,li{
+			margin:0;
+			padding:0;
+		}
+		.dropmenu{
+			list-style-type:none;
+			width:600px;
+			margin:10px auto;
+		}
+		.dropmenu:before, .dropmenu:after{
+			content:"";
+			display:table;
+		}
+		.dropmenu:after{
+			clear:both;
+		}
+		.dropmenu li{
+			position:relative;
+			width:200px;
+			float:left;
+			text-align:center;
+		}
+		.dropmenu li a{
+			display:block;
+			padding:15px 0 11px;
+			background:#FF66CC;
+			color:#fff;
+			line-height:1em;
+			text-decoration:none;
+		}
+		.dropmenu li ul{
+			list-style: none;
+			position:absolute;
+			top:100%;
+			laft:0;
+		}
+		.dropmenu li ul li{
+			width:200px;
+		}
+		.dropmenu li ul li a{
+			padding:13px 15px;
+			text-align:center;
+			background:#FF66CC;
+			color:#fff;
+		}
+		.dropmenu li:hover > a{
+			background:#FFCCFF;
+			color:#FF66CC;
+		}
+		.dropmenu li a:hover{
+			background:#FFCCFF;
+			color:#FF66CC;
+		}
+		#menu li ul{
+			display:none;
+		}
+	</style>
+	
+	<meta http-equiv="Content-Script-Type" content="text/javascript">
+	<script src="//code.jquery.com/jquery-2.2.4.js"></script>
+	<script type="text/javascript">
+		$(function(){
+			/*
+			$("ul a").on("click",function(){
+				$("ul ul").filter('#' + $(this).html()).toggle();
+			});
+			*/
+			$("ul li").on("click",function(){
+				$(this).children("ul").toggle();
+			});
+		});
+	</script>
+</head>
+<body>
+	<ul id="menu" class="dropmenu">
+		<li><a href="#">AKB48</a>
+			<ul id="AKB48">
+				<li><a href="#">前田敦子</a></li>
+				<li><a href="#">大島優子</a></li>
+				<li><a href="#">渡辺麻友</a></li>
+			</ul>
+		</li>
+		<li><a href="#">SKE48</a>
+			<ul id="SKE48">
+				<li><a href="#">松井珠理奈</a></li>
+				<li><a href="#">松井玲奈</a></li>
+			</ul>
+		</li>
+		<li><a href="#">HKT48</a>
+			<ul id="HKT48">
+				<li><a href="#">指原莉乃</a></li>
+				<li><a href="#">宮脇咲良</a></li>
+			</ul>
+		</li>
+	</ul>
+</body>
+</html>

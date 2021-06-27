@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Youtube</title>
+</head>
+<body>
+<!-- <iframe>(とプレイヤ）に置き換わる<div>タグ -->
+<div id="player"></div>
+<script>
+//プレイリスト
+var playlist = ['dFf4AgBNR1E','vEVq_Bx7_KY','lkHlnWFnA0c','0pKfxbCHLoU'];
+//現在再生中の曲のインデックス
+var current = 0;
+//次を再生
+function playNext(){
+	//プレイリストの次を再生。最後まで到達したら先頭のビデオを再生
+	current++;
+	if(current >= playlist.length){
+		current = 0;
+	}
+	player.loadVideoById(playlist[current]);
+}
+//IFrame Player APIを非同期にロード
+var tag = document.createElement('script');
+tag.src = 'http://www.youtube.com/player_api';
+var firstScriptTag = document.getElementsByTagName('script')[0];
+firstScriptTag.parentNode.insertBefore(tag,firstScriptTag);
+
+//APIをダウンロードしたら<iframe>とYoutubeプレイヤーを生成
+var player;
+function onYouTubePlayerAPIReady(){
+	player = new YT.Player('player',{
+		height:'390',
+		width:'640',
+		videoId:playlist[current],
+		events:{
+			'onReady':onPlayerReady,
+			'onStateChange':onPlayerStateChange,
+			'onError':onPlayerError
+		}
+	});
+}
+//プレイヤーが準備できたら呼び出される
+function onPlayerReady(event){
+	event.target.playVideo();
+}
+//ステータスが変更されたら呼び出される
+//ビデオが終わったら次を再生
+function onPlayerStateChange(event){
+	if(event.data == YT.PlayerState.ENDED){
+		playNext();
+	}
+}
+//エラーが起きたら次を再生
+function onPlayerError(event){
+	playNext();
+}
+</script>
+</body>
+</html>

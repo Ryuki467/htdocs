@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="UTF-8">
+	<title>jQuery</title>
+	
+	<meta http-equiv="Content-Script-Type" content="text/javascript">
+	<script src="//code.jquery.com/jquery-2.2.4.js"></script>
+	<script type="text/javascript">
+		$(function(){
+			$("#btn").on("click",function(){
+				$(".q08 a").removeAttr("href");
+			});
+		});
+	</script>
+</head>
+<body>
+<button id="btn">クリック</button>
+<p class="q08"><a href="#">前田敦子</a></p>
+<p><a href="#">指原莉乃</a></p>
+<p class="q08"><a href="#">大島優子</a></p>
+<p><a href="#">山本彩</a></p>
+<p class="q08"><a href="#">篠田麻里子</a></p>
+</body>
+</html>

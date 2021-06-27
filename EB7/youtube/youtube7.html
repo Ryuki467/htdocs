@@ -8,17 +8,15 @@
 <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 <script src="js/bootstrap.min.js"></script>
 <script>
-	var apiKey = 'AIzaSyCqn6pnlUNoHZ2UpiFcsmcBB5gYNVq1WTU';
+	var apiKey = 'AIzaSyAnw59OW6fa9Ka7GGG_obzWAN8pDHLleac';
 	var videoId;
-	var playlist = []; //プレイリスト 動画のIDを入れる
-	var current = 0; //現在再生中の曲のインデックス
 	var googleApiClientReady = function(){
 		init();
 	}
-	var init = function(){ //検索関連
+	var init = function(){
 		$('#btn').attr('disabled',false);
 	}
-	var search = function(keyword){ 
+	var search = function(keyword){
 		gapi.client.setApiKey(apiKey);
 		gapi.client.load('youtube','v3',function(){});
 		var request = gapi.client.request({
@@ -30,20 +28,20 @@
 			}
 		});
 		request.execute(function(data){
+			console.log(data);
 			if(!data.items)return;
 			$('#main').text('');
 			for(var i in data.items){
 				if(data.items[i].id.videoId && data.items[i].id.kind == "youtube#video"){
 					videoId = data.items[i].id.videoId;
-					//自動再生済み
-					//movie = '<iframe frameborder="0" width="100%" allowfullscreen="1" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" title="YouTube video player" height="100%" src="https://www.youtube.com/embed/' + data.items[i].id.videoId + '?autoplay=1&mute=1&enablejsapi=1" frameborder="0"><iframe>';
+					movie = '<iframe width="560" height="315" src="https://www.youtube.com/embed/' + data.items[i].id.videoId + '"frameborder="0"><iframe>';
 					$('#main').append('<div id="movie_title"><a href="https://www.youtube.com/watch?v=' + data.items[i].id.videoId + 'target="_black">' + data.items[i].snippet.title 
 					+ '</a></div>' 
-					+ '<div id="movie_description">' + data.items[i].snippet.description + '</div>').children('#movie_title').after('<div id="player"></div>');
+					+ '<div id="movie_description">' + data.items[i].snippet.description + '</div>').children('#movie_title').after(movie);
 				}
-				loading();
 				break;
 			}
+			console.log(videoId);
 			search_related(keyword,videoId);
 		});
 	}
@@ -61,106 +59,22 @@
 			}
 		});
 		request.execute(function(data){
+			console.log(data);
 			if(!data.items)return;
 			$('#related').text('');
 			$('#related').append('<table>');
 			for(var i in data.items){
-				playlist.push(data.items[i].id.videoId); //youtubeのIDを追加
 				if(data.items[i].id.videoId && data.items[i].id.kind == "youtube#video"){
-					$('#related table').append('<tr class="movie_box" id=' + i + '><td class="thum"><a href="https://www.youtube.com/watch?v=' + data.items[i].id.videoId 
+					$('#related table').append('<tr class="movie_box"><td class="thum"><a href="https://www.youtube.com/watch?v=' + data.items[i].id.videoId 
 					+ 'target="_black"><img src=' + data.items[i].snippet.thumbnails.default.url + '></a></td>'
 					+ '<td class="details">' + data.items[i].snippet.title 
 					+ '<span class="description"></span></td></tr>');
 				}
-				if(current == i){
-					$('#' + i).addClass("choose"); 
-				}
 			}
-			console.log(playlist);
 			$('#loading').fadeOut();
 			$('#main_box').show();
 		});
 	}
-	
-	//次を再生
-	function playNext(){
-		//プレイリストの次を再生。最後まで到達したら先頭のビデオを再生
-		current++;
-		if(current >= playlist.length){
-			current = 0;
-		}
-		player.loadVideoById(playlist[current]);
-	}
-	//戻る
-	function playPrev(){
-		current--;
-		if(current<0){
-			current = playlist.length-1;
-		}
-		player.loadVideoById(playlist[current]);
-	}
-	//再生と停止
-	function exe(){
-		if(player.getPlayerState() == YT.PlayerState.PLAYING){
-			player.pauseVideo();
-		}else{
-			player.playVideo();
-		}
-	}
-	//IFrame Player APIを非同期にロード
-	function loading(){
-		var tag = document.createElement('script');
-		tag.src = 'http://www.youtube.com/player_api';
-		var firstScriptTag = document.getElementsByTagName('script')[0];
-		firstScriptTag.parentNode.insertBefore(tag,firstScriptTag);
-	}
-	
-	//APIをダウンロードしたら<iframe>とYoutubeプレイヤーを生成
-	var player;
-	function onYouTubePlayerAPIReady(){
-		player = new YT.Player('player',{
-			height:'390',
-			width:'640',
-			videoId:playlist[current],
-			events:{
-				'onReady':onPlayerReady,
-				'onStateChange':onPlayerStateChange,
-				'onError':onPlayerError
-			}
-		});
-	}
-	//プレイヤーが準備できたら呼び出される
-	function onPlayerReady(event){
-		event.target.playVideo();
-	}
-	//ステータスが変更されたら呼び出される
-	//ビデオが終わったら次を再生
-	/*
-	function onPlayerStateChange(event){
-		if(event.data == YT.PlayerState.ENDED){
-			playNext();
-		}else if(event.data == YT.PlayerState.PLAYING){
-			$('#exe').val("停止");
-		}else if(event.data == YT.PlayerState.PAUSED){
-			$('#exe').val("再生");
-		}
-	}
-	*/
-	//エラーが起きたら次を再生
-	function onPlayerError(event){
-		playNext();
-	}
-	$(window).on("load",function(){
-		$('#prev').on('click',function(){
-			playPrev();
-		});
-		$('#next').on('click',function(){
-			playNext();
-		});
-		$('#exe').on('click',function(){
-			exe();
-		});
-	});
 	
 	$(function(){
 		$('#main_box').hide();
@@ -205,8 +119,7 @@ html, body{
 	width: 1200px;
 }
 #main{
-	width:700px;
-	height:500px;
+	width:600px;
 	background-color:#fff;
 	margin-top:20px;
 	
@@ -238,10 +151,6 @@ html, body{
 	padding:10px 10px 20px 0;
 	vertical-align:top;
 }
-.choose{
-	background-color: orangered;
-    color: white;
-}
 </style>
 </head>
 <body>
@@ -249,11 +158,8 @@ html, body{
 	<div id="loading"></div>
 	<div id="header">
 		<form>
-			<input type="text" id="keyword" value="ジョジョの奇妙な冒険">
+			<input type="text" id="keyword" value="AKB48">
 			<input type="submit" id="btn" value="検索" disabled="disabled">
-			<input type="button" value=" < < " id="prev">
-			<input type="button" value=" 再生 " id="exe">
-			<input type="button" value=" > > " id="next">
 		</form>
 	</div>
 	<div id="main_box" class="clearfix">

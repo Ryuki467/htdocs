@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="UTF-8">
+	<title>jQuery</title>
+	
+	<style>
+		body{
+			margin:0;
+			padding:0;
+		}
+		#mark{
+			width:150px;
+			height:30px;
+			margin:0 auto;
+			font-size:20px;
+			background:#Ff0;
+			text-align:center;
+		}
+		#q35-box{
+			position:relative;
+			height:150px;
+			background:#F00;
+		}
+		#q35{
+			width:150px;
+			height:150px;
+			background:#F0F;
+			position:absolute;
+			text-align:center;
+		}
+	</style>
+	
+	<meta http-equiv="Content-Script-Type" content="text/javascript">
+	<script src="//code.jquery.com/jquery-2.2.4.js"></script>
+	<script type="text/javascript">
+		$(function(){
+			var div_tags = $("#q35");
+			div_tags.on("click",function(){
+				var pos = $(window).width()/2 - $("#q35").width()/2;
+				console.log(pos);
+				$("#q35").animate({
+					'marginLeft':pos
+				});
+			});
+		});
+	</script>
+</head>
+<body>
+	<h2 id="mark">ここがセンター</h2>
+	<div id="q35-box">
+		<div id="q35">センターを目指せ！</div>
+	</div>
+</body>
+</html>

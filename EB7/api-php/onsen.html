@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="UTF-8">
+	<title>ajax練習</title>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
+<script>
+var key = "cap14ddbecad68";
+var api_url_area = "http://jws.jalan.net/APICommon/AreaSearch/V1/?key=";
+var api_url_onsen = "http://jws.jalan.net/APICommon/OnsenSearch/V1/?key=";
+var api_url_hotel = "http://jws.jalan.net/APIAdvance/HotelSearch/V1/?key=";
+
+$(window).load(function(){
+	$('#pref').change(function(){
+		getOnsen();
+	});
+	$('#search').click(function(){
+		getHotel();
+	});
+	getArea();
+});
+
+function sendRequest(url,callBackFunction){
+	$(function(){
+		$.ajax({
+			url:'jalan.php',
+			dataType:'text',
+			data:{'url':url},
+			type:'POST',
+			success:callBackFunction,
+		});
+	});
+}
+
+function getArea(){
+	var area_url = api_url_area + key;
+	sendRequest(area_url,areaResult);
+}
+
+function areaResult(data){
+	var jalan = JSON.parse(data);
+	$('#pref').children().remove();
+	$('#pref').append($('<option>').val('').text('選択'));
+	$(jalan.Area.Region).each(function(){
+		if($.isArray(this.Prefecture)){
+			$(this.Prefecture).each(function(){
+				$('#pref').append($('<option>').val(this['@attributes']['cd']).text(this['@attributes']['name']));
+			});
+		}else{
+			$('#pref').append($('<option>').val(this.Prefecture['@attributes']['cd']).text(this.Prefecture['@attributes']['name']));
+		}
+	});
+}
+
+function getOnsen(){
+	var pref_cd = $('#pref').val();
+	if(pref_cd != ''){
+		var onsen_url = api_url_onsen + key + '&pref=' + pref_cd;
+		sendRequest(onsen_url,onsenResult);
+	}
+}
+
+function onsenResult(data){
+	var jalan = JSON.parse(data);
+	$('#onsen').children().remove();
+	$('#onsen').append($('<option>').val('').text('選択'));
+	$(jalan.Onsen).each(function(){
+		$('#onsen').append($('<option>').val(this.OnsenID).text(this.OnsenName));
+	});
+}
+
+function getHotel(){
+	var o_id = $('#onsen').val();
+	if(o_id == null || o_id == ''){
+		alert('都道府県、温泉地が選択されていません');
+		return;
+	}
+	var hotel_url = api_url_hotel + key + '&o_id=' + o_id;
+	sendRequest(hotel_url,hotelResult);
+}
+				
+
+function hotelResult(data){
+	jalan = JSON.parse(data);
+	$('#results').text('');
+	$('#results').append('検索結果' + jalan.NumberOfResults);
+	if(jalan.NumberOfResults == 0){
+		return false;
+	}
+	$('#results').append('<table border="1">');
+	$(jalan.Hotel).each(function(){
+		$('#results table').append('<tr>');
+		$('#results table tr:last-child').append('<td>' + this.HotelID + '</td>');
+		$('#results table tr:last-child').append('<td>' + this.HotelCatchCopy + '<a href=' + this.HotelDetailURL + '>' + this.HotelName + '</a></td>');
+		$('#results table tr:last-child').append('<td><img src=' + this.PictureURL + '>' + this.PictureCaption + '</a></td>');
+		$('#results table tr:last-child').append('<td>' + this.HotelCaption + '</td>');
+		$('#results table tr:last-child').append('<td>' + this.PostCode + '<br>' + this.HotelAddress + '</td>');
+	});
+}
+</script>
+</head>
+<body>
+<div id="container">
+	<form name="frm1">
+		<div>都道府県:<select name="pref" id="pref"></select></div>
+		<div>温泉:<select name="onsen" id="onsen"></select></div>
+		<div><input type="button" value="検索" id="search"></div>
+		<hr/>
+		<div id="results"></div>
+	</form>
+</div>
+</body>
+</html>

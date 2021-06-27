@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="UTF-8">
+	<title>jQuery</title>
+	
+	<style>
+		.yuki{
+			padding:10px;
+			border:#f00 2px solid;
+		}
+	</style>
+	
+	<meta http-equiv="Content-Script-Type" content="text/javascript">
+	<script src="//code.jquery.com/jquery-2.2.4.js"></script>
+	<script type="text/javascript">
+		$(function(){
+			$("#btn").on("click",function(){
+				$("#q14").wrap("<div class='yuki'>");
+			});
+		});
+	</script>
+</head>
+<body>
+	<button id="btn">クリック</button>
+	<p id="q14">柏木由紀</p>
+</body>
+</html>

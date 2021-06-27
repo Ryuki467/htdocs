@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="UTF-8">
+	<title>jQuery</title>
+	
+	<style>
+		.akb{
+			color:#F00;
+		}
+		.ske{
+			font-weight:900;
+			font-size:24px;
+			color:#00F;
+		}
+	</style>
+	
+	<meta http-equiv="Content-Script-Type" content="text/javascript">
+	<script src="//code.jquery.com/jquery-2.2.4.js"></script>
+	<script type="text/javascript">
+		$(function(){
+			$("#btn").on("click",function(){
+				$("#q18").toggleClass("ske");
+			});
+		});
+	</script>
+</head>
+<body>
+	<button id="btn">クリック</button>
+	<p id="q18" class="akb">ゆきりん</p>
+</body>
+</html>

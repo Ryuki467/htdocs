@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="UTF-8">
+	<title>jQuery</title>
+	
+	<style>
+		.akb{
+			color:#F00;
+		}
+	</style>
+	
+	<meta http-equiv="Content-Script-Type" content="text/javascript">
+	<script src="//code.jquery.com/jquery-2.2.4.js"></script>
+	<script type="text/javascript">
+		$(function(){
+			var li_tags = $("ul.kami7 li");
+			li_tags.on("click",function(){
+				var rank = li_tags.index(this) + 1;
+				$("#q33").html("クリックしたのは" + rank + "番目");
+			});
+		});
+	</script>
+</head>
+<body>
+	<ul class="kami7">
+		<li>前田敦子</li>
+		<li>大島優子</li>
+		<li>篠田麻里子</li>
+		<li>板野友美</li>
+		<li>渡辺麻友</li>
+		<li>高橋みなみ</li>
+		<li>小嶋陽菜</li>
+	</ul>
+	<p id="q33"></p>
+</body>
+</html>
