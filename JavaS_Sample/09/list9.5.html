@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="utf-8">
+<title>JavaScriptの練習</title>
+<script>
+	function inputCheck(){
+		if(document.frm1.lastname.value == ""){
+			alert("姓を入力してください");
+		}else if(document.frm1.firstname.value == ""){
+			alert("名を入力してください");
+		}else if(!document.frm1.gender[0].checked && !document.frm1.gender[1].checked){
+			alert("性別を選択してください");
+		}else{
+			document.frm1.submit();
+		}
+	}
+</script>
+</head>
+<body>
+	<form name="frm1" action="xxx.html">
+		<fieldset>
+			<legend>名前</legend>
+			<label>姓
+				<input type="text" name="lastname">
+			</label>
+			<label>名
+				<input type="text" name="firstname">
+			</label>
+		</fieldset>
+		<fieldset>
+			<legend>性別</legend>
+			<label>
+				<input type="radio" name="gender" value="m">男
+			</label>
+			<label>
+				<input type="radio" name="gender" value="f">女
+			</label>
+		</fieldset>
+		<input type="button" onclick="inputCheck();" value="送信">
+	</form>
+</body>
+</html>

@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+	<meta charset="utf-8">
+	<title>JavaScriptの練習</title>
+	<style>
+		.large{
+			font-size:30px;
+		}
+		.highlight{
+			color:white;
+			background-color:red;
+		}
+		
+	</style>
+	
+	
+	<!-- jQueryの読み込み -->
+	<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+	<script>
+		$(function(){
+			//$("#msg1").html($("#msg2").html());
+			console.log($("#msg2").html());
+			$("#msg2").html("こんばんは");
+			
+			//$("#msg3").val($("#msg4").val());
+			$("#msg3").val("こんにちは！");
+			$("#msg4").attr("value","");
+			
+			$("img").attr("src","../images/frog1.jpg");
+			
+			$("input[value=orange]").removeAttr("checked");
+			
+			$("option[value=hamster]").removeAttr("selected");//属性の削除
+			$("option[value=cat]").prop('selected', true);//属性の追加
+			//$("option[value=cat]").attr('selected', true);//ipadではうまく動かなかったらしい
+			//$("option[value=cat]").attr('selected', 'selected');//ipadではうまく動かなかったらしい
+			
+			/*
+			$("#btn").on("click",sayHello);
+			*/
+			
+			/*
+			$("#btn").on("click",function(){
+				alert("おはよう! 野郎ども");
+			});
+			*/
+			
+			/*
+			$("#btn").on("click",{name:"よしお"},sayHello2);
+			*/
+			
+			$("#btn")
+				.on("click",printHello)
+				.on("click",sayHello)
+			
+			console.log(document.getElementById("msg5").className);
+			$("#btn1").on("click",change1);
+			$("#btn2").on("click",change2);
+			$("#btn3").on("click",change3);
+			$("#btn4").on("click",change4);
+		});
+		
+		function printHello(){
+			console.log("こんにちは");
+		}
+		function sayHello(){
+			alert("おはよう! 野郎ども");
+			$("#btn").off("click",sayHello);
+			$(this).attr("disabled","disabled");
+		}
+		function sayHello2(event){
+			alert(event.data.name + "さん、こんにちは");
+		}
+		
+		function change1(){
+			//$("#msg5").addClass("large");//クラスに追加
+			$("#msg5").attr("class","large");//クラスを上書き
+		}
+		function change2(){
+			//$("#msg5").addClass("highlight");
+			$("#msg5").attr("class","highlight");
+		}
+		function change3(){
+			console.log(document.getElementById("msg5").className);
+			$("#msg5").removeClass(document.getElementById("msg5").className);//クラスを削除
+		}
+		function change4(){
+			//$("#msg5").toggleClass("large highlight"); //largeとhighlightどちらもあるか、ないか
+			$("#msg5","").toggleClass("large highlight"); //largeとhighlightを交互に表示
+		}
+	</script>
+</head>
+<body>
+	<p id="msg1">おはよう</p>
+	<p id="msg2">こんにちは</p>
+	
+	<input type="text" id="msg3" value="おはよう">
+	<input type="text" id="msg4" value="こんにちは">
+	
+	<br><br>
+	<img>
+	
+	<br><br>
+	<input type="checkbox" name="fruits" value="apple" checked>りんご
+	<input type="checkbox" name="fruits" value="orange" checked>みかん
+	<input type="checkbox" name="fruits" value="strawberry" checked>いちご
+	
+	<br><br>
+	<label for="pet-select">Choose a pet:</label>
+	<select name="pets" id="pet-select">
+	    <option value="">--Please choose an option--</option>
+	    <option value="dog">Dog</option>
+	    <option value="cat">Cat</option>
+	    <option value="hamster" selected>Hamster</option>
+	    <option value="parrot">Parrot</option>
+	    <option value="spider">Spider</option>
+	    <option value="goldfish">Goldfish</option>
+	</select>
+    <button id="btn">クリック</button>
+    <br><br>
+    <button id="btn1">large</button><button id="btn2">highlight</button><button id="btn3">delete.class</button><button id="btn4">change</button>
+    <p id="msg5" class="large" id="text">こんにちは</p>
+</body>
+</html>

@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="utf-8">
+<title>ワーク</title>
+<script>
+var Item = function(price,unit){
+	this.price = price;
+	this.unit = unit;
+	this.total= price * unit;
+};
+//Item.prototype.getTotal = function(){
+//	return this.price * this.unit;
+//}
+//Item.prototype.test = function(x) {
+//	return x;
+//}
+Item.prototype = {
+	getTotal: function() {
+		return this.price * this.unit;
+	},
+	test: function(x) {
+		return x;
+	},
+};
+var data = [
+	new Item(120,3),
+	new Item(30,2),
+	new Item(80,1),
+	new Item(100,3),
+];
+var total = 0;
+for(var i=0; i<data.length; i++){
+	console.log(data[i]);
+	console.log(data[i].getTotal());
+	total += data[i].getTotal();
+	//console.log(data[i].test(i));
+}
+console.log(data);
+console.log(total);
+</script>
+</head>
+<body>
+</body>
+</html>

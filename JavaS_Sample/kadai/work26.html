@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="utf-8">
+<title>ワーク</title>
+<script>
+	function max(){
+		var value_a = document.getElementById("value_a").value;
+		var value_b = document.getElementById("value_b").value;
+		var result = Math.max(value_a,value_b);
+		document.getElementById("answer").value = result;
+	}
+	window.onload = function() {
+		document.querySelector('[name=keisan]').onclick = max;
+	};
+</script>
+</head>
+<body>
+	<table>
+		<tr>
+			<td><input type="text" id="value_a" size=4></td>
+			<td><input type="text" id="value_b" size=4></td>
+			<td><input type="button" name="keisan" id="btn" value="大きい値は？"></td>
+		</tr>
+	</table>
+	<div>大きい値は:<input type="text" id="answer" size=10></div>
+</body>
+</html>

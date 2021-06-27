@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8"/>
+  <title>ワーク</title>
+	<script>
+		function showMessages(){
+			var age = document.getElementById("age").value;
+			console.log(age);
+			if(!age){
+				alert("数字を入力してください");
+				console.log(1);
+			}else if(isNaN(age)){
+				alert("数字を入力してください");
+				console.log(2);
+			}else{
+				if(age >= 20){
+					document.getElementById('result').value = "20歳以上です";
+				}else{
+					document.getElementById('result').value = "20歳未満です";
+				}
+			}
+		}
+	</script>
+</head>
+<body>
+<table>
+<tr><td>年齢</td><td><input type="text" id="age"></td></tr>
+<tr><td>結果</td><td><input id="result"></td></tr>
+<tr><td colspan="2"><input type="button" id="btn" value="実行" onclick="showMessages()"></td></tr>
+</table>
+</body>
+</html>

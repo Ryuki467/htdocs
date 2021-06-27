@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="utf-8">
+<title>JavaScriptの練習</title>
+<script>
+	function setValue2(){
+		var elm = document.getElementsByName("tx1");
+		for(var i=0; i<elm.length; i++){
+			elm[i].value = "Hello!";
+		}
+	}
+</script>
+</head>
+<body>
+<input type="text" name="tx1">
+<input type="text" name="tx1">
+<input type="text" name="tx1">
+<button onclick="setValue2();">クリック</button>
+</body>
+</html>

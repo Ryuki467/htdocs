@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="utf-8">
+<title>ワーク</title>
+<script>
+var sum = [0,0,0];
+var data = [5,9,12,4,5,1];
+for (var i=0,len=data.length; i<len; ++i) {
+	console.log(data[i]);
+	sum[0] += data[i];
+};
+console.log(sum[0],"1回目");
+
+sum[1] = function(data){
+	var total = 0;
+	data.forEach(function(elm) {
+		console.log(elm);
+		total += elm;
+	});
+	return total;
+};
+console.log(sum[1](data),"2回目");
+
+sum[2]  = function(data) {
+    return data.reduce(function(prev, current, i, arr) {
+        return prev+current;
+    });
+};
+console.log(sum[2](data),"3回目");
+</script>
+</head>
+<body>
+</body>
+</html>

@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="utf-8">
+<title>ワーク</title>
+<style>
+	div{
+		margin:10px;
+		padding:10px;
+		width:50px;
+		height:50px;
+		border:1px solid white;
+		line-height: 50px;
+		float:left;
+		text-align:center;
+		color:white;
+	}
+	#red{background-color:red;}
+	#green{background-color:green;}
+	#blue{background-color:blue;}
+	#black{background-color:black;}
+	#white{background-color:white;}
+</style>
+</head>
+<body id="body" name="body">
+	<div id="red" onmouseover="change('red')" onmouseout="back()">赤</div>
+	<div id="green" onmouseover="change('green')" onmouseout="back()">緑</div>
+	<div id="blue" onmouseover="change('blue')" onmouseout="back()">青</div>
+	<div id="black" onmouseover="change('black')" onmouseout="back()">黒</div>
+	<script>
+		var body = document.querySelector('[name=body]');
+		console.log(body);
+		function change(color){
+			//body.style.backgroundColor = color;
+			body.id = color;
+		}
+		function back(){
+			//body.style.backgroundColor="white";
+			body.id = "white";
+		}
+	</script>
+</body>
+</html>

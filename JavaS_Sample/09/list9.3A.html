@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang = "ja">
+  <head>
+    <meta charset = "utf-8">
+    <title>JavaScriptの練習</title>
+  </head>
+  <body>
+    <script>
+      let count = 0;
+      const countUp = () => {
+        console.log(count++);
+        //1,000ミリ秒後にcountUp関数を呼び出す処理を追加
+  	  	var id = setTimeout(countUp, 1000);//一度だけ動く
+  	  	if(count > 5){　
+      		clearTimeout(id);　//idをclearTimeoutで指定している
+    	}
+      } 
+      countUp();
+      
+      var timeoutID;
+	  function delayedAlert() {
+	  	timeoutID = window.setTimeout(window.alert, 2*1000, '本当に遅い！');
+	  	console.log(timeoutID,'ボタン');
+	  }
+	
+	  function clearAlert() {
+	  	window.clearTimeout(timeoutID);
+	  }
+    </script>
+    <p>Live Example</p>
+	<button onclick="delayedAlert();">2秒後にアラートボックスを表示する</button>
+	<p></p>
+	<button onclick="clearAlert();">アラートを事前にキャンセルする</button>
+  </body>
+</html>

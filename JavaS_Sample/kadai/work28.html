@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="utf-8">
+<title>ワーク</title>
+<style>
+	#display,#control{
+		text-align:center;
+	}
+	#image{
+		width:500px;
+		height:500px;
+	}
+</style>
+</head>
+<body>
+	<div id="display"><img src="weather001.png" id="image"></div>
+	<div id="control">
+		<input type="button" id="prev" value="戻る">
+		<input type="button" id="next" value="次へ">
+	</div>
+	<script>
+		var images = [
+			"weather001.png",
+			"weather002.png",
+			"weather003.png",
+			"weather004.png",
+		];
+		var index = 0;
+		var src = document.querySelector('[id=image]').src;
+		console.log(src);
+		function prev(){
+			if(index == 0){
+				index = 4;
+			}
+			document.querySelector('[id=image]').src=images[--index];
+		}
+		function next(){
+			if(index == 3){
+				index = -1;
+			}
+			document.querySelector('[id=image]').src=images[++index];
+		}
+		document.querySelector('[id = prev]').onclick = prev;
+		document.querySelector('[id = next]').onclick = next;
+	</script>
+</body>
+</html>

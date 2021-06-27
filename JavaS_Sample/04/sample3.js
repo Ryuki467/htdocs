@@ -1,0 +1,13 @@
+var a = 10;
+a = a + 5;
+console.log(a);
+a += 5;
+console.log(a);
+a = a + 1;
+console.log(a);
+console.log(a++);
+console.log(a);
+var x = "100" + 100;
+console.log(x);
+var x = 100 + "100";
+console.log(x);

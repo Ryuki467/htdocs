@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+	<meta charset="utf-8">
+	<title>JavaScriptの練習</title>
+	
+	<!-- jQueryの読み込み -->
+	<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+	<script>
+		$(function(){
+			$("#fruits")
+				.append("<li>パイナップル</li>")
+				.prepend("<li>パパイヤ</li>")
+			
+			$("ul + p")
+				.after("<p>おやすみ</p>")
+				.before("<p>おはよう</p>")
+			
+			$("#btn").on("click",function(){
+				$("#fruits").empty();
+				$("div p").replaceWith("<img src='../images/frog2.jpg'></img>");
+			});
+			
+			setSubCategory();
+			$("#main").on("change",setSubCategory);
+		});
+		
+		function setSubCategory(){
+			var subList = [
+				["ノート","タワー型","一体型"],
+				["マウス","キーボード","モニター","スピーカー"],
+			];
+			var i = $("#main>option:selected").val();
+			
+			var sub = $("#sub");
+			sub.empty();//サブの選択肢を削除　これをしないと溜まっていく
+			
+			for(var j=0; j<subList[i].length; j++){
+				sub.append("<option value=" + j + ">"+subList[i][j] + "</option>");
+			}
+		}
+	</script>
+</head>
+<body>
+	<ul id="fruits">
+		<li>りんご</li>
+		<li>みかん</li>
+		<li>いちご</li>
+		<li>ぶどう</li>
+	</ul>
+	<p>こんにちは</p>
+	<button id="btn">クリック</button>
+	<div><p>みかん</p></div>
+	
+	<!-- メインカテゴリー -->
+	<select id="main">
+	    <option value="0">PC本体</option>
+	    <option value="1">PC周辺機器</option>
+	</select>
+	
+	<!-- サブカテゴリー -->
+	<select id="sub">
+	</select>
+</body>
+</html>

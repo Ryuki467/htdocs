@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="utf-8">
+<title>ワーク</title>
+<script>
+var Person = function(name,age){
+	this.name = name;
+	this.age = age;
+};
+var data = [
+	new Person("yamada",25),
+	new Person("sato",26),
+	new Person("suzuki",21),
+	new Person("yamamoto",25),
+];
+for(var i=0; i<data.length; i++){
+	console.log(data[i].name+":"+data[i].age);
+}
+</script>
+</head>
+<body>
+</body>
+</html>

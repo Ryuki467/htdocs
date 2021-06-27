@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+	<meta charset="utf-8">
+	<title>JavaScriptの練習</title>
+	
+	<!-- jQueryの読み込み -->
+	<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+	<script>
+		$(function(){
+			$("#parent > p").css("font-size","30px");
+			$("#parent2 p").css("font-size","30px");
+		});
+	</script>
+</head>
+<body>
+	<div id="parent">
+		<p>段落1</p>
+		<div>
+			<p>段落2</p>
+		</div>
+	</div>
+	<div id="parent2">
+		<p>段落1</p>
+		<div>
+			<p>段落2</p>
+		</div>
+	</div>
+</body>
+</html>

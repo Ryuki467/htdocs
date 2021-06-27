@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="utf-8">
+<title>JavaScriptの練習</title>
+<script>
+	function showImage(i){
+		var htmlstr = "<img src='frog" + i + ".img' width='300px' height='300px'>";
+		document.getElementById("imageArea").innerHTML = htmlstr;
+		this.disabled = true;
+	}
+	window.onload = function(){
+		document.getElementById("btn").onclick=function(){
+			showImage(1);
+		}
+	}
+</script>
+</head>
+<body>
+	<button id="btn">読込</button>
+	<div id="imageArea">ここに画像が読み込まれます</div>
+</body>
+</html>

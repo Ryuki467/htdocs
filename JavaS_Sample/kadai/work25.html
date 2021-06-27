@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8"/>
+  <title>ワーク</title>
+	<script>
+		function Calculation(){
+			var radius = document.getElementById("radius").value;
+			console.log(radius);
+			if(!radius){
+				alert("数字を入力してください");
+				console.log(1);
+			}else if(isNaN(radius)){
+				alert("数字を入力してください");
+				console.log(2);
+			}else{
+				document.getElementById("area").value = radius * radius * Math.PI;
+			}
+		}
+		window.onload = function() {
+			//document.getElementById('btn').onclick = Calculation;
+			console.log(document.querySelectorAll('input'));
+			//document.querySelector('input[value=計算]').onclick = Calculation;
+			document.querySelector('[name=keisan]').onclick = Calculation;
+		};
+	</script>
+</head>
+<body>
+	<table>
+		<tr>
+			<td>半径</td>
+			<td><input type="text" id="radius"></td>
+			<td><input type="button" name="keisan" id="btn" value="計算"></td>
+		</tr>
+	</table>
+	<div>円の面積:<input type="text" id="area"></div>
+</body>
+</html>

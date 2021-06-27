@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+	<meta charset="utf-8">
+	<title>JavaScriptの練習</title>
+	
+	<!-- jQueryの読み込み -->
+	<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+	<script>
+		$(function(){
+			//$("p+a").css("font-size","30px");
+			$("p~a").css("font-size","30px");
+		});
+	</script>
+</head>
+<body>
+	<p>ヘッダ</p>
+	<a href="prev.html">前ページへ</a>
+	<a href="prev.html">次ページへ</a>
+	<p>
+		本文
+		<a href="index.html">TOPへ</a>
+	</p>
+</body>
+</html>

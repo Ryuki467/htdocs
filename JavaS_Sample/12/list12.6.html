@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+	<meta charset="utf-8">
+	<title>JavaScriptの練習</title>
+	
+	<!-- jQueryの読み込み -->
+	<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+	<script>
+		$(function(){
+			console.log($("div").filter(".item").html());
+			console.log($("div").find(".item").html());
+			
+			//console.log($("div").filter(".item").html());
+			//console.log($("body").find(".item").html());
+			
+			//console.log($("p").filter(".item").html());
+			//console.log($("div").find(".item").html());
+		});
+	</script>
+</head>
+<body>
+	<div class="item">
+		<p>あいうえお</p>
+	</div>
+	<div>
+		<p class="item">かきくけこ</p>
+	</div>
+</body>
+</html>

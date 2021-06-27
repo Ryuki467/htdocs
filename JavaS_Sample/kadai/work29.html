@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="utf-8">
+<title>ワーク</title>
+	<script>
+		function time() {
+			setTimeout(b,5000);
+		}
+		var b = function (){
+			document.querySelector('[id=message]').innerHTML = "タイムアップ";
+		};
+	</script>
+</head>
+<body>
+	<input type="button" id="start" value="スタート" onclick="time()">
+	<div id="message"></div>
+</body>
+</html>

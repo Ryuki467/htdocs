@@ -1,0 +1,18 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="utf-8">
+<title>ワーク</title>
+<script>
+var data = [5,9,12,4,5,1];
+var sum = function(data) {
+    return data.reduce(function(prev, current, i, arr) {
+        return prev+current;
+    });
+};
+console.log(sum(data)/data.length);
+</script>
+</head>
+<body>
+</body>
+</html>

@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+	<meta charset="utf-8">
+	<title>JavaScriptの練習</title>
+
+	<!-- jQueryの読み込み -->
+	<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+	<script>
+		$(function(){
+			$("#large").on("click",function(){
+				$("#photo").animate({
+					"width" : "90%",
+					"height" : "90%"
+				},2000,"linear").animate({
+					"width" : "20%",
+					"height" : "20%"
+				},2000,"linear")
+			});
+		});
+	</script>
+	<link rel="stylesheet" type="text/css" href="style.css">
+</head>
+<body>
+	<div>
+		<button id="large">拡大</button>
+	</div>
+	<img src="../images/frog2.jpg" id="photo" width="20%" height="20%">
+</body>
+</html>

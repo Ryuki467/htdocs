@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="utf-8">
+<title>JavaScriptの練習</title>
+<style>
+.right{
+	width: 200px;
+}
+.left{
+	height: 200px;
+}
+</style>
+<script>
+	function s(){
+		var elm = document.getElementById("hoge");
+		console.log(elm);
+		elm.className = "right";
+	}
+	function f(){
+		var element = document.getElementById("p1");
+		console.log(element);
+		element.innerHTML += "名<input type='text' name='mei' class='right'>";
+		p1.innerHTML += "名<input type='text' name='mei' class='right'>";
+		var elem = document.getElementById("test");
+		elem.innerHTML = "<span style='color: red;'>span要素に変更したよ！</span>";
+	}
+</script>
+</head>
+<body>
+	<input type="text" id="hoge" name="fuga" class="left">
+	<button onclick="s();">クリック</button>
+	<p id="p1">
+		姓<input type="text" name="sei">
+	</p>
+	<p id="test">初めてのJavaScript勉強中だよ！</p>
+	<button onclick="f();">クリック</button>
+</body>
+</html>

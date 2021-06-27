@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+	<meta charset="utf-8">
+	<title>JavaScriptの練習</title>
+	
+	<!-- jQueryの読み込み -->
+	<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+	<script>
+		$(function(){
+			$.getJSON("item.json",
+				function(data){
+					for(var j=0; j<data.length; j++){
+						$("#dataTable")
+							.append("<tr></tr>")
+							.find("tr:last")
+							.append("<td>" + data[j].code + "</td>")
+							.append("<td>" + data[j].name + "</td>")
+							.append("<td>" + data[j].price + "</td>");
+					}
+				}
+			);
+		});
+	</script>
+</head>
+<body>
+	<table id="dataTable">
+		<tr><th>code</th><th>name</th><th>price</th></tr>
+	</table>
+</body>
+</html>

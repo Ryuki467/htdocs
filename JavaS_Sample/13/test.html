@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+	<meta charset="utf-8">
+	<title>JavaScriptの練習</title>
+	
+	<!-- jQueryの読み込み -->
+	<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+	<script>
+		$(function(){
+			var q = encodeURIComponent("アシアル株式会社");
+			$.getJSON("http://search.twitter.com/search.json?callback=?&q=" + q,
+				function(data){
+					for(var j=0; j<data.results.length; j++){
+						$("table")
+							.append("<tr>" + "<td><img src=" 
+							+ data.results[j].profile_image_url + "></td><td>@" 
+							+ data.results[j].from_user + "</td><td>" 
+							+ data.results[j].from_user_name + "</td><td>" 
+							+ data.results[j].text + "</td>"
+							+ "</tr>"
+						);
+					}
+				}
+			);
+		});
+	</script>
+</head>
+<body>
+	<table>
+		<tr>
+			<th>プロフ画面</th>
+			<th>アカウント</th>
+			<th>名前</th>
+			<th>ツイート</th>
+		</tr>
+	</table>
+</body>
+</html>

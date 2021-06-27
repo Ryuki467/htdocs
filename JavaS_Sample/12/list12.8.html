@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="utf-8">
+<title>JavaScriptの練習</title>
+<style>
+	.active{
+		display: block;
+	}
+	.passive{
+		display: none;
+	}
+</style>
+<!-- jQueryの読み込み -->
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<script>
+	/*
+	function showIppan(){
+		document.getElementById("ippan_area").className = "active";
+		document.getElementById("hojin_area").className = "passive";
+	}
+	function showHojin(){
+		document.getElementById("ippan_area").className = "passive";
+		document.getElementById("hojin_area").className = "active";
+	}
+	*/
+	
+	$(function(){
+		$("input[name=target]").on("change",function(){
+			$("#ippan_area,#hojin_area").toggleClass("active passive");
+		});
+	});
+</script>
+</head>
+<body>
+<input type="radio" name="target" value="i" checked>一般用
+<input type="radio" name="target" value="h">法人用
+<ul id="ippan_area" class="active">
+	<li>氏名<input type="text" name="name"></li>
+	<li>住所<input type="text" name="address"></li>
+	<li>電話番号<input type="text" name="tel"></li>
+</ul>
+<ul id="hojin_area" class="passive">
+	<li>会社名<input type="text" name="company"></li>
+	<li>部署名<input type="text" name="busho"></li>
+	<li>担当者名<input type="text" name="tanto"></li>
+	<li>住所<input type="text" name="address"></li>
+	<li>電話番号<input type="text" name="tel"></li>
+	<li>内線番号<input type="text" name="naisen"></li>
+</ul>
+</body>
+</html>

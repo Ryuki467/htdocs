@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="utf-8">
+<title>ワーク</title>
+	<script>
+		function output(){
+			var	count = document.querySelector('[id=count]').value;
+			console.log(count);
+			count--;
+			document.querySelector('[id=count]').value = count;
+			if(count <= 0){
+				clearInterval(timer);
+				document.querySelector('[id=message]').innerHTML = "タイムアップ！";
+			}
+		}
+		
+		function time() {
+			timer = setInterval(output,1000);
+		}
+	</script>
+</head>
+<body>
+	<input type="text" id="count" value="10">
+	<input type="button" id="start" value="スタート" onclick="time()">※連打すると加速
+	<div id="message"></div>
+</body>
+</html>

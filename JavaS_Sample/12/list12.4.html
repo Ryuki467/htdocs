@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+	<meta charset="utf-8">
+	<title>JavaScriptの練習</title>
+	
+	<!-- jQueryの読み込み -->
+	<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+	<script>
+		$(function(){
+			//$("#fruits>li:first").css("background-color","red");
+			//$("#fruits>li:last").css("background-color","red");
+			//$("#fruits>li:even").css("background-color","red");
+			//$("#fruits>li:odd").css("background-color","red");
+			//$("#fruits>li:contains('かん')").css("background-color","red");
+			//$("#fruits>li:not(:first)").css("background-color","red");
+			//$("#fruits>li:eq(2)").css("background-color","red");
+			
+			//$("#fruits>li").css("background-color","red");
+			//$("#fruits>li:even").css("color","white");
+			
+			//var elm=$("#fruits>li");
+			//elm.css("background-color","red");
+			//elm.filter(":even").css("color","white");
+			
+			$("#fruits>li")
+				.css("background-color","red")
+				.filter(":even")
+				.css("color","white");
+		});
+	</script>
+</head>
+<body>
+	<ul id="fruits">
+		<li>りんご</li>
+		<li>みかん</li>
+		<li>いちご</li>
+		<li>ぶどう</li>
+		<li>いよかん</li>
+	</ul>
+</body>
+</html>
