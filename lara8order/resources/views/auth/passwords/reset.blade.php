@@ -1,4 +1,8 @@
-@extends('layouts.app')
+@extends('layouts.default')
+
+@section('title','Reset')
+
+@include('layouts.menu.default')
 
 @section('content')
 <div class="container">
