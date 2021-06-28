@@ -1,0 +1,6 @@
+mysqldump -u root -p contact_form > C:\Users\no1s\Desktop\contact_form.sql
+
+
+php.ini
+httpd.conf
+sendmail.ini
