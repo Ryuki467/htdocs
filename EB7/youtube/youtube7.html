@@ -54,7 +54,7 @@
 				'q':keyword,
 				'type':'video',
 				'rekatedToVideoId':videoId,
-				'maxResults': 5,
+				'maxResults': 1,
 				'part':'snippet',
 			}
 		});
@@ -158,8 +158,11 @@ html, body{
 	<div id="loading"></div>
 	<div id="header">
 		<form>
-			<input type="text" id="keyword" value="AKB48">
+			<input type="text" id="keyword" value="ジョジョの奇妙な冒険">
 			<input type="submit" id="btn" value="検索" disabled="disabled">
+			<input type="button" value=" < < " id="prev">
+			<input type="button" value=" 再生 " id="exe">
+			<input type="button" value=" > > " id="next">
 		</form>
 	</div>
 	<div id="main_box" class="clearfix">

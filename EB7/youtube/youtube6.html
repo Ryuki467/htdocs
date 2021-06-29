@@ -8,17 +8,73 @@
 <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 <script src="js/bootstrap.min.js"></script>
 <script>
-	var apiKey = 'AIzaSyAnw59OW6fa9Ka7GGG_obzWAN8pDHLleac';
+	var apiKey = 'AIzaSyAEK0gRJWey3nF0M5SNJJp8EWe2zl9xKpE';
 	var videoId;
 	var playlist = []; //プレイリスト 動画のIDを入れる
+	var titles = []; //右のリストのタイトルを挿入
+	var descriptions = []; //右のリストの説明を挿入
 	var current = 0; //現在再生中の曲のインデックス
+	var first_flg = true;
+	
 	var googleApiClientReady = function(){
 		init();
 	}
+	var search_related = function(keyword,videoId = ""){ //左の再生リスト
+		gapi.client.setApiKey(apiKey);
+		gapi.client.load('youtube','v3',function(){});
+		var request = gapi.client.request({
+			'path':'/youtube/v3/search',
+			'params':{
+				'q':keyword,
+				'type':'video',
+				'maxResults': 3,
+				'part':'snippet',
+			}
+		});
+		request.execute(function(data){
+			if(!data.items)return;
+			$('#related').text('');
+			$('#related').append('<table>');
+			playlist = [];
+			titles = [];
+			descriptions = [];
+			if(!first_flg){
+				$("#" + current).removeClass("choose");
+				current = -1;
+			}
+			console.log(data);
+			for(var i in data.items){
+				playlist.push(data.items[i].id.videoId); //youtubeのIDを追加
+				titles.push(data.items[i].snippet.title); //youtubeのIDを追加
+				descriptions.push(data.items[i].snippet.description); //youtubeのIDを追加
+				if(data.items[i].id.videoId && data.items[i].id.kind == "youtube#video"){
+					$('#related table').append('<tr class="movie_box" id=' + i + '><td class="thum"><a href="https://www.youtube.com/watch?v=' + data.items[i].id.videoId 
+					+ 'target="_black"><img src=' + data.items[i].snippet.thumbnails.default.url + '></a></td>'
+					+ '<td class="details">' + data.items[i].snippet.title 
+					+ '<span class="description"></span></td></tr>');
+				}
+				if(current == i){
+					$('#' + i).addClass("choose"); 
+				}
+			}
+			$('#movie_title').after('<div id="player"></div>');
+			console.log(playlist);
+			console.log(titles);
+			console.log(descriptions);
+			if(first_flg){
+				loading();
+			}
+			c();
+			first_flg = false;
+			$('#loading').fadeOut();
+			$('#main_box').show();
+		});
+	}
+	
 	var init = function(){ //検索関連
 		$('#btn').attr('disabled',false);
 	}
-	var search = function(keyword){ 
+	var search = function(keyword){ //動画の枠
 		gapi.client.setApiKey(apiKey);
 		gapi.client.load('youtube','v3',function(){});
 		var request = gapi.client.request({
@@ -39,84 +95,43 @@
 					//movie = '<iframe frameborder="0" width="100%" allowfullscreen="1" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" title="YouTube video player" height="100%" src="https://www.youtube.com/embed/' + data.items[i].id.videoId + '?autoplay=1&mute=1&enablejsapi=1" frameborder="0"><iframe>';
 					$('#main').append('<div id="movie_title"><a href="https://www.youtube.com/watch?v=' + data.items[i].id.videoId + 'target="_black">' + data.items[i].snippet.title 
 					+ '</a></div>' 
-					+ '<div id="movie_description">' + data.items[i].snippet.description + '</div>').children('#movie_title').after('<div id="player"></div>');
+					+ '<div id="movie_description">' + data.items[i].snippet.description + '</div>');
 				}
-				loading();
 				break;
 			}
 			search_related(keyword,videoId);
 		});
 	}
-	var search_related = function(keyword,videoId){
-		gapi.client.setApiKey(apiKey);
-		gapi.client.load('youtube','v3',function(){});
-		var request = gapi.client.request({
-			'path':'/youtube/v3/search',
-			'params':{
-				'q':keyword,
-				'type':'video',
-				'rekatedToVideoId':videoId,
-				'maxResults': 5,
-				'part':'snippet',
-			}
-		});
-		request.execute(function(data){
-			if(!data.items)return;
-			$('#related').text('');
-			$('#related').append('<table>');
-			for(var i in data.items){
-				playlist.push(data.items[i].id.videoId); //youtubeのIDを追加
-				if(data.items[i].id.videoId && data.items[i].id.kind == "youtube#video"){
-					$('#related table').append('<tr class="movie_box" id=' + i + '><td class="thum"><a href="https://www.youtube.com/watch?v=' + data.items[i].id.videoId 
-					+ 'target="_black"><img src=' + data.items[i].snippet.thumbnails.default.url + '></a></td>'
-					+ '<td class="details">' + data.items[i].snippet.title 
-					+ '<span class="description"></span></td></tr>');
-				}
-				if(current == i){
-					$('#' + i).addClass("choose"); 
-				}
-			}
-			console.log(playlist);
-			$('#loading').fadeOut();
-			$('#main_box').show();
-		});
-	}
 	
-	//次を再生
-	function playNext(){
-		//プレイリストの次を再生。最後まで到達したら先頭のビデオを再生
-		current++;
-		if(current >= playlist.length){
-			current = 0;
-		}
-		player.loadVideoById(playlist[current]);
-	}
-	//戻る
-	function playPrev(){
-		current--;
-		if(current<0){
-			current = playlist.length-1;
-		}
-		player.loadVideoById(playlist[current]);
-	}
-	//再生と停止
-	function exe(){
-		if(player.getPlayerState() == YT.PlayerState.PLAYING){
-			player.pauseVideo();
-		}else{
-			player.playVideo();
-		}
-	}
-	//IFrame Player APIを非同期にロード
+	$(function(){
+		$('#main_box').hide();
+		$("form").submit(function(){
+			var keyword = $('#keyword').val();
+			$('#loading').fadeIn();
+			if(first_flg){
+				search(keyword);
+			}else{
+				search_related(keyword);
+			}
+			return false;
+		});
+	});
+	
 	function loading(){
 		var tag = document.createElement('script');
 		tag.src = 'http://www.youtube.com/player_api';
 		var firstScriptTag = document.getElementsByTagName('script')[0];
 		firstScriptTag.parentNode.insertBefore(tag,firstScriptTag);
+		console.log(1);
+		loading2();
 	}
 	
 	//APIをダウンロードしたら<iframe>とYoutubeプレイヤーを生成
-	var player;
+	function loading2(){
+		player;
+		console.log(player);
+	}
+	//検索ボタンを押した際
 	function onYouTubePlayerAPIReady(){
 		player = new YT.Player('player',{
 			height:'390',
@@ -129,13 +144,26 @@
 			}
 		});
 	}
+	
+	//プレイリストをクリックした際
+	function c(){
+		$("tr").on("click",function(){
+			num = $(this).attr("id");
+			$("#" + current).removeClass("choose");
+			current = num;
+			$("#" + current).addClass("choose");
+			change();
+			player.loadVideoById(playlist[current]);
+		});
+	}
+	
 	//プレイヤーが準備できたら呼び出される
 	function onPlayerReady(event){
 		event.target.playVideo();
 	}
+	
 	//ステータスが変更されたら呼び出される
 	//ビデオが終わったら次を再生
-	/*
 	function onPlayerStateChange(event){
 		if(event.data == YT.PlayerState.ENDED){
 			playNext();
@@ -145,7 +173,6 @@
 			$('#exe').val("再生");
 		}
 	}
-	*/
 	//エラーが起きたら次を再生
 	function onPlayerError(event){
 		playNext();
@@ -162,15 +189,44 @@
 		});
 	});
 	
-	$(function(){
-		$('#main_box').hide();
-		$("form").submit(function(){
-			var keyword = $('#keyword').val();
-			$('#loading').fadeIn();
-			search(keyword);
-			return false;
-		});
-	});
+	//次を再生
+	function playNext(){
+		//プレイリストの次を再生。最後まで到達したら先頭のビデオを再生
+		$("#" + current).removeClass("choose");
+		current++;
+		if(current >= playlist.length){
+			current = 0;
+		}
+		$("#" + current).addClass("choose");
+		change();
+		player.loadVideoById(playlist[current]);
+	}
+	//戻る
+	function playPrev(){
+		$("#" + current).removeClass("choose");
+		current--;
+		if(current<0){
+			current = playlist.length-1;
+		}
+		$("#" + current).addClass("choose");
+		change();
+		player.loadVideoById(playlist[current]);
+	}
+	
+	//再生と停止
+	function exe(){
+		if(player.getPlayerState() == YT.PlayerState.PLAYING){
+			player.pauseVideo();
+		}else{
+			player.playVideo();
+		}
+	}
+	
+	function change(){
+		$("#movie_title").children("a").html(titles[current]);
+		$("#movie_title").children("a").attr("href","https://www.youtube.com/watch?v=" + playlist[current]);
+		$("#movie_description").html(descriptions[current]);
+	}
 </script>
 <style>
 html, body{
@@ -206,7 +262,7 @@ html, body{
 }
 #main{
 	width:700px;
-	height:500px;
+	height:700px;
 	background-color:#fff;
 	margin-top:20px;
 	
